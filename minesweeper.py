@@ -3,6 +3,9 @@ EASY = 1
 MEDIUM = 2
 HARD = 3
 
+HIT = False
+MISS = True
+
 class minesweeper:
   def __init__(self, type):
     if type == EASY:
@@ -28,6 +31,7 @@ class minesweeper:
       mines = 40
     elif type == HARD:
       mines = 99
+      
     while mines > 0:
       x = random.randint(0, self.rows-1)
       y = random.randint(0, self.columns-1)
@@ -35,3 +39,9 @@ class minesweeper:
       if not self.board[index]:
         self.board[index] = True
         mines = mines - 1
+
+  def click(self, r, c):
+    if (self.board[r*self.columns+c]):
+      return HIT
+    else:
+      return MISS

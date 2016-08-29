@@ -10,4 +10,10 @@
 
 # Diary
 
+Rules used are from here: http://www.wikihow.com/Play-Minesweeper
+
 Surprised that an array does not have a len method
+
+Range is [) . It took a little while to figure that out. Handy, but weird.
+
+

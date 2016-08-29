@@ -72,5 +72,15 @@ class TestMinesweeper(unittest.TestCase):
           count = count + 1
     self.assertEqual(count, 99)
     
+  def test_click_mine(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    board.board[3] = True
+    hitMine = board.click(0,3)
+    self.assertEqual(hitMine, minesweeper.HIT)
+
+    board.board[3] = False
+    hitMine = board.click(0,3)
+    self.assertEqual(hitMine, minesweeper.MISS)
+    
 if __name__ == '__main__':
   unittest.main()
