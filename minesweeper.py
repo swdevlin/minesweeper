@@ -3,6 +3,10 @@ EASY = 1
 MEDIUM = 2
 HARD = 3
 
+FLAG_OK = 1
+FLAG_ILLEGAL = 2
+FLAG_DUPLICATE = 3
+
 HIT = False
 MISS = True
 
@@ -19,6 +23,7 @@ class minesweeper:
       self.columns = 30
     cells = self.rows * self.columns
     self.playerBoard = ['?'] * cells
+    self.flags = []
     self.clear()
     self.setupMines(type)
 
@@ -49,12 +54,12 @@ class minesweeper:
 
   def adjacentMines(self,row,col):
     count=0
-    for r in range(-1,2):
-      for c in range(-1,2):
-        if not (r==c and r == 0):
-          if r + row >= 0 and r+row < self.rows:
-            if c+col >=0 and c+col < self.columns:
-              if self.board[(r+row)*self.columns+c+col]:
+    for r in range(row-1,row+2):
+      for c in range(col-1,col+2):
+        if not (r==row and c == col):
+          if r >= 0 and r < self.rows:
+            if c >=0 and c < self.columns:
+              if self.board[(r)*self.columns+c]:
                 count += 1
     return count
 
@@ -80,3 +85,17 @@ class minesweeper:
       visited = []
       self.reveal(r,c,visited)
       return MISS
+  
+  def flagCount(self):
+    return len(self.flags)
+
+  def plantFlag(self, r, c):
+    if r >= self.rows or c >= self.columns or r < 0 or c < 0:
+      return FLAG_ILLEGAL
+      
+    index = r * self.columns + c
+    if not index in self.flags:
+      self.flags.append(index)
+      return FLAG_OK
+    else:
+      return FLAG_DUPLICATE

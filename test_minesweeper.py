@@ -180,5 +180,49 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(board.cell(3,2), '?')
     self.assertEqual(board.cell(3,3), '?')
     
+  def test_plantFlag(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    result = board.plantFlag(0,0)
+    self.assertEqual(board.flagCount(), 1)
+    self.assertEqual(result, minesweeper.FLAG_OK)
+
+  def test_plantFlag_no_dupes(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    result = board.plantFlag(0,0)
+    self.assertEqual(result, minesweeper.FLAG_OK)
+    result = board.plantFlag(0,0)
+    self.assertEqual(result, minesweeper.FLAG_DUPLICATE)
+    self.assertEqual(board.flagCount(), 1)
+
+  def test_plantFlag_checkcoords(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+
+    # Can't plant flag outside of the grid
+    result = board.plantFlag(0,100)
+    self.assertEqual(board.flagCount(), 0)
+    self.assertEqual(result, minesweeper.FLAG_ILLEGAL)
+
+    result = board.plantFlag(100,0)
+    self.assertEqual(board.flagCount(), 0)
+    self.assertEqual(result, minesweeper.FLAG_ILLEGAL)
+
+    result = board.plantFlag(0,-1)
+    self.assertEqual(board.flagCount(), 0)
+    self.assertEqual(result, minesweeper.FLAG_ILLEGAL)
+
+    result = board.plantFlag(-1,0)
+    self.assertEqual(board.flagCount(), 0)
+    self.assertEqual(result, minesweeper.FLAG_ILLEGAL)
+
+  def test_plantFlag_multiple(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    result = board.plantFlag(0,0)
+    self.assertEqual(result, minesweeper.FLAG_OK)
+    result = board.plantFlag(3,2)
+    self.assertEqual(result, minesweeper.FLAG_OK)
+    result = board.plantFlag(4,1)
+    self.assertEqual(result, minesweeper.FLAG_OK)
+    self.assertEqual(board.flagCount(), 3)
+
 if __name__ == '__main__':
   unittest.main()
