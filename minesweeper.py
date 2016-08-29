@@ -6,6 +6,12 @@ HARD = 3
 FLAG_OK = 1
 FLAG_ILLEGAL = 2
 FLAG_DUPLICATE = 3
+FLAG_NONE = 4
+
+SOLVED = 0
+WRONG = 1
+NOT_ENOUGH_FLAGS = 2
+TOO_MANY_FLAGS = 3
 
 HIT = False
 MISS = True
@@ -99,3 +105,29 @@ class minesweeper:
       return FLAG_OK
     else:
       return FLAG_DUPLICATE
+      
+  def removeFlag(self, r, c):
+    if r >= self.rows or c >= self.columns or r < 0 or c < 0:
+      return FLAG_ILLEGAL
+      
+    index = r * self.columns + c
+    if not index in self.flags:
+      return FLAG_NONE
+    else:
+      self.flags.remove(index)
+      return FLAG_OK
+      
+  def solved(self):
+    mines = 0
+    for i in range(0,len(self.board)):
+      if self.board[i]:
+        mines += 1
+    if len(self.flags) < mines:
+      return NOT_ENOUGH_FLAGS 
+    elif len(self.flags) > mines:
+      return TOO_MANY_FLAGS
+    else:
+      for i in self.flags:
+        if not self.board[i]:
+          return WRONG
+      return SOLVED

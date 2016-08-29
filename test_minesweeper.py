@@ -224,5 +224,68 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(result, minesweeper.FLAG_OK)
     self.assertEqual(board.flagCount(), 3)
 
+  def test_removeFlag(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    result = board.plantFlag(0,0)
+    self.assertEqual(board.flagCount(), 1)
+    self.assertEqual(result, minesweeper.FLAG_OK)
+    result = board.removeFlag(0,0)
+    self.assertEqual(board.flagCount(), 0)
+    self.assertEqual(result, minesweeper.FLAG_OK)
+
+  def test_removeFlag_empty(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    result = board.removeFlag(0,0)
+    self.assertEqual(board.flagCount(), 0)
+    self.assertEqual(result, minesweeper.FLAG_NONE)
+
+  def test_removeFlag_twice(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    result = board.plantFlag(0,0)
+    self.assertEqual(board.flagCount(), 1)
+    self.assertEqual(result, minesweeper.FLAG_OK)
+    result = board.removeFlag(0,0)
+    self.assertEqual(board.flagCount(), 0)
+    self.assertEqual(result, minesweeper.FLAG_OK)
+    result = board.removeFlag(0,0)
+    self.assertEqual(board.flagCount(), 0)
+    self.assertEqual(result, minesweeper.FLAG_NONE)
+    
+  def test_puzzleSolved_too_few(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    result = board.solved()
+    self.assertEqual(result, minesweeper.NOT_ENOUGH_FLAGS)
+    result = board.plantFlag(0,0)
+    self.assertEqual(board.flagCount(), 1)
+    self.assertEqual(result, minesweeper.FLAG_OK)
+    result = board.solved()
+    self.assertEqual(result, minesweeper.NOT_ENOUGH_FLAGS)
+    
+  def test_puzzleSolved_too_many(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    board.clear()
+    board.board[11] = True
+    result = board.plantFlag(0,0)
+    result = board.plantFlag(0,1)
+    result = board.plantFlag(2,0)
+    result = board.solved()
+    self.assertEqual(result, minesweeper.TOO_MANY_FLAGS)
+    
+  def test_puzzleSolved_wrong(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    board.clear()
+    board.board[11] = True
+    board.plantFlag(0,2)
+    result = board.solved()
+    self.assertEqual(result, minesweeper.WRONG)
+    
+  def test_puzzleSolved(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    board.clear()
+    board.board[11] = True
+    board.plantFlag(1,2)
+    result = board.solved()
+    self.assertEqual(result, minesweeper.SOLVED)
+    
 if __name__ == '__main__':
   unittest.main()
