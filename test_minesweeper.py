@@ -17,6 +17,31 @@ class TestMinesweeper(unittest.TestCase):
           count = count + 1
     self.assertEqual(count, 10)
     
+  def test_init_allunknown(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    count = 0
+    for r in range(0, board.rows):
+      for c in range(0, board.columns):
+        if board.playerBoard[r*board.columns + c] == '?':
+          count = count + 1
+    self.assertEqual(count, board.rows*board.columns)
+
+    board = minesweeper.minesweeper(minesweeper.MEDIUM)
+    count = 0
+    for r in range(0, board.rows):
+      for c in range(0, board.columns):
+        if board.playerBoard[r*board.columns + c] == '?':
+          count = count + 1
+    self.assertEqual(count, board.rows*board.columns)
+
+    board = minesweeper.minesweeper(minesweeper.HARD)
+    count = 0
+    for r in range(0, board.rows):
+      for c in range(0, board.columns):
+        if board.playerBoard[r*board.columns + c] == '?':
+          count = count + 1
+    self.assertEqual(count, board.rows*board.columns)
+    
   def test_medium(self):
     board = minesweeper.minesweeper(minesweeper.MEDIUM)
     self.assertEqual(len(board.board), 256)
