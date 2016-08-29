@@ -19,9 +19,16 @@ class minesweeper:
       self.columns = 30
     cells = self.rows * self.columns
     self.playerBoard = ['?'] * cells
-    self.board = [False] * cells
+    self.clear()
     self.setupMines(type)
 
+  def cell(self,r,c):
+    return self.playerBoard[r * self.columns + c]
+    
+  def clear(self):
+    cells = self.rows * self.columns
+    self.board = [False] * cells
+  
   def setupMines(self, type):
     for i in range(0,len(self.board)-1):
       self.board[i] = False
@@ -38,10 +45,27 @@ class minesweeper:
       index = x * self.columns + y
       if not self.board[index]:
         self.board[index] = True
-        mines = mines - 1
+        mines -= 1
+
+  def adjacentMines(self,row,col):
+    count=0
+    for r in range(-1,2):
+      for c in range(-1,2):
+        if not (r==c and r == 0):
+          if r + row >= 0 and r+row < self.rows:
+            if c+col >=0 and c+col < self.columns:
+              if self.board[(r+row)*self.columns+c+col]:
+                count += 1
+    return count
 
   def click(self, r, c):
     if (self.board[r*self.columns+c]):
       return HIT
     else:
+      index = r*self.columns+c
+      mines = self.adjacentMines(r,c)
+      if mines > 0:
+        self.playerBoard[r*self.columns+c] = str(mines)
+      else:
+        self.playerBoard[r*self.columns+c] = ' '
       return MISS
