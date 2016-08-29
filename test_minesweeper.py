@@ -97,7 +97,7 @@ class TestMinesweeper(unittest.TestCase):
     board.clear()
     hitMine = board.click(0,3)
     self.assertEqual(board.cell(0,3), ' ')
-
+    
   def test_adjacentMines(self):
     board = minesweeper.minesweeper(minesweeper.HARD)
     board.clear()
@@ -139,6 +139,46 @@ class TestMinesweeper(unittest.TestCase):
     mines = board.adjacentMines(1,1)
     self.assertEqual(mines, 8)
     
+  def test_click_reveal(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    board.clear()
+    '''
+    000100000
+    000100000
+    000100000
+    111100000
+    000000000
+    000000000
+    000000000
+    000000000
+    000000000
+    '''
+    board.board[ 0+3] = True
+    board.board[ 9+3] = True
+    board.board[18+3] = True
+    board.board[27+0] = True
+    board.board[27+1] = True
+    board.board[27+2] = True
+    board.board[27+3] = True
+
+    hitMine = board.click(1,1)
+    self.assertEqual(hitMine, minesweeper.MISS)
+    self.assertEqual(board.cell(0,0), ' ')
+    self.assertEqual(board.cell(0,1), ' ')
+    self.assertEqual(board.cell(0,2), '2')
+    self.assertEqual(board.cell(0,3), '?')
+    self.assertEqual(board.cell(1,0), ' ')
+    self.assertEqual(board.cell(1,1), ' ')
+    self.assertEqual(board.cell(1,2), '3')
+    self.assertEqual(board.cell(1,3), '?')
+    self.assertEqual(board.cell(2,0), '2')
+    self.assertEqual(board.cell(2,1), '3')
+    self.assertEqual(board.cell(2,2), '5')
+    self.assertEqual(board.cell(3,3), '?')
+    self.assertEqual(board.cell(3,0), '?')
+    self.assertEqual(board.cell(3,1), '?')
+    self.assertEqual(board.cell(3,2), '?')
+    self.assertEqual(board.cell(3,3), '?')
     
 if __name__ == '__main__':
   unittest.main()

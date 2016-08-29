@@ -58,14 +58,25 @@ class minesweeper:
                 count += 1
     return count
 
+  def reveal(self, row, col, visited):
+    mines = self.adjacentMines(row,col)
+    visited.append(row*self.columns+col)
+    if mines > 0:
+      self.playerBoard[row*self.columns+col] = str(mines)
+    else:
+      self.playerBoard[row*self.columns+col] = ' '
+      for r in range(row-1,row+2):
+        if r >= 0 and r < self.rows:
+          for c in range(col-1,col+2):
+            if c >= 0 and c < self.columns:
+              index = r*self.columns + c
+              if not index in visited:
+                self.reveal(r,c,visited)
+
   def click(self, r, c):
     if (self.board[r*self.columns+c]):
       return HIT
     else:
-      index = r*self.columns+c
-      mines = self.adjacentMines(r,c)
-      if mines > 0:
-        self.playerBoard[r*self.columns+c] = str(mines)
-      else:
-        self.playerBoard[r*self.columns+c] = ' '
+      visited = []
+      self.reveal(r,c,visited)
       return MISS
