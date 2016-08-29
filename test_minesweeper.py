@@ -7,6 +7,15 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(len(board.board), 81)
     self.assertEqual(board.rows, 9)
     self.assertEqual(board.columns, 9)
+
+  def test_easy_has_10(self):
+    board = minesweeper.minesweeper(minesweeper.EASY)
+    count = 0
+    for r in range(0, board.rows):
+      for c in range(0, board.columns):
+        if board.board[r*board.columns + c]:
+          count = count + 1
+    self.assertEqual(count, 10)
     
   def test_medium(self):
     board = minesweeper.minesweeper(minesweeper.MEDIUM)
@@ -14,11 +23,29 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(board.rows, 16)
     self.assertEqual(board.columns, 16)
     
+  def test_medium_has_40(self):
+    board = minesweeper.minesweeper(minesweeper.MEDIUM)
+    count = 0
+    for r in range(0, board.rows):
+      for c in range(0, board.columns):
+        if board.board[r*board.columns + c]:
+          count = count + 1
+    self.assertEqual(count, 40)
+    
   def test_hard(self):
     board = minesweeper.minesweeper(minesweeper.HARD)
     self.assertEqual(len(board.board), 480)
     self.assertEqual(board.rows, 16)
     self.assertEqual(board.columns, 30)
+    
+  def test_hard_has_99(self):
+    board = minesweeper.minesweeper(minesweeper.HARD)
+    count = 0
+    for r in range(0, board.rows):
+      for c in range(0, board.columns):
+        if board.board[r*board.columns + c]:
+          count = count + 1
+    self.assertEqual(count, 99)
     
 if __name__ == '__main__':
   unittest.main()
