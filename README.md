@@ -27,3 +27,7 @@ Storing flags in a list. I don't think I need to use a matrix for them, and I do
 I am not sure if my returns codes should be an enum or not. Still pondering that.
 
 True and False needing to be upper case is annoying
+
+I think the engine is done; 5 hours time to code. Code coverage is at 99%.
+
+Now for the UI.
