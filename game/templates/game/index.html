@@ -1,0 +1,45 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:500|Russo+One" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="{% static "game/minesweeper.css" %}" rel="stylesheet">
+    <script src="{% static "game/minesweeper.js" %}"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header text-center">
+        <h1>Minesweeper</h1>
+        <p>The classic Windows game brought back to life.</p>
+      </div>
+    </div>
+    <div id="gameboard" class="container" style="position:relative">
+      <div class="row text-center">
+        <button id="easy" class="btn btn-success btn-lg launch" type="button">Start an Easy game</button>
+        <p><em>9x9 grid, 10 mines</em></p>
+      </div>
+      <div class="row text-center">
+        <button id="standard" class="btn btn-primary btn-lg launch" type="button">Start a Standard game</button>
+        <p><em>16x16 grid, 40 mines</em></p>
+      </div>
+      <div class="row text-center">
+        <button id="hard" class="btn btn-danger btn-lg launch" type="button">Start a Hard game</button>
+        <p><em>16x30 grid, 99 mines</em></p>
+      </div>
+    </div>
+    <div id="footer" class="well container collapse">
+      <div class="row">
+        <div id="footer-left" class="col-md-4"></div>
+        <div id="footer-center" class="col-md-4">
+          <div id="message" class="collapse"></div>
+        </div>
+        <div id="footer-right" class="col-md-4"></div>
+      </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

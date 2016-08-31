@@ -16,7 +16,7 @@ TOO_MANY_FLAGS = 3
 HIT = False
 MISS = True
 
-class minesweeper:
+class Minesweeper:
   def __init__(self, type):
     if type == EASY:
       self.rows = 9
@@ -39,9 +39,16 @@ class minesweeper:
   def clear(self):
     cells = self.rows * self.columns
     self.board = [False] * cells
+
+  def numberOfMines(self):
+    count = 0
+    for i in range(0,len(self.board)):
+      if self.board[i]:
+        count += 1
+    return count
   
   def setupMines(self, type):
-    for i in range(0,len(self.board)-1):
+    for i in range(0,len(self.board)):
       self.board[i] = False
     if type == EASY:
       mines = 10

@@ -1,15 +1,15 @@
 import unittest
-import minesweeper
+from minesweeper import minesweeper
 
 class TestMinesweeper(unittest.TestCase):
   def test_easy(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     self.assertEqual(len(board.board), 81)
     self.assertEqual(board.rows, 9)
     self.assertEqual(board.columns, 9)
 
   def test_easy_has_10(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     count = 0
     for r in range(0, board.rows):
       for c in range(0, board.columns):
@@ -18,7 +18,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(count, 10)
 
   def test_init_allunknown(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     count = 0
     for r in range(0, board.rows):
       for c in range(0, board.columns):
@@ -26,7 +26,7 @@ class TestMinesweeper(unittest.TestCase):
           count = count + 1
     self.assertEqual(count, board.rows*board.columns)
 
-    board = minesweeper.minesweeper(minesweeper.MEDIUM)
+    board = minesweeper.Minesweeper(minesweeper.MEDIUM)
     count = 0
     for r in range(0, board.rows):
       for c in range(0, board.columns):
@@ -34,7 +34,7 @@ class TestMinesweeper(unittest.TestCase):
           count = count + 1
     self.assertEqual(count, board.rows*board.columns)
 
-    board = minesweeper.minesweeper(minesweeper.HARD)
+    board = minesweeper.Minesweeper(minesweeper.HARD)
     count = 0
     for r in range(0, board.rows):
       for c in range(0, board.columns):
@@ -43,13 +43,13 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(count, board.rows*board.columns)
 
   def test_medium(self):
-    board = minesweeper.minesweeper(minesweeper.MEDIUM)
+    board = minesweeper.Minesweeper(minesweeper.MEDIUM)
     self.assertEqual(len(board.board), 256)
     self.assertEqual(board.rows, 16)
     self.assertEqual(board.columns, 16)
 
   def test_medium_has_40(self):
-    board = minesweeper.minesweeper(minesweeper.MEDIUM)
+    board = minesweeper.Minesweeper(minesweeper.MEDIUM)
     count = 0
     for r in range(0, board.rows):
       for c in range(0, board.columns):
@@ -58,13 +58,13 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(count, 40)
 
   def test_hard(self):
-    board = minesweeper.minesweeper(minesweeper.HARD)
+    board = minesweeper.Minesweeper(minesweeper.HARD)
     self.assertEqual(len(board.board), 480)
     self.assertEqual(board.rows, 16)
     self.assertEqual(board.columns, 30)
 
   def test_hard_has_99(self):
-    board = minesweeper.minesweeper(minesweeper.HARD)
+    board = minesweeper.Minesweeper(minesweeper.HARD)
     count = 0
     for r in range(0, board.rows):
       for c in range(0, board.columns):
@@ -73,7 +73,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(count, 99)
 
   def test_click_mine_hitmiss(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     board.board[3] = True
     hitMine = board.click(0,3)
     self.assertEqual(hitMine, minesweeper.HIT)
@@ -83,7 +83,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(hitMine, minesweeper.MISS)
 
   def test_clear(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     board.clear()
     count = 0
     for r in range(0, board.rows):
@@ -93,13 +93,13 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(count, 0)
   
   def test_click_mine_cell_blank(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     board.clear()
     hitMine = board.click(0,3)
     self.assertEqual(board.cell(0,3), ' ')
     
   def test_adjacentMines(self):
-    board = minesweeper.minesweeper(minesweeper.HARD)
+    board = minesweeper.Minesweeper(minesweeper.HARD)
     board.clear()
     mines = board.adjacentMines(1,1)
     self.assertEqual(mines, 0)
@@ -140,7 +140,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(mines, 8)
     
   def test_click_reveal(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     board.clear()
     '''
     000100000
@@ -181,13 +181,13 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(board.cell(3,3), '?')
     
   def test_plantFlag(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     result = board.plantFlag(0,0)
     self.assertEqual(board.flagCount(), 1)
     self.assertEqual(result, minesweeper.FLAG_OK)
 
   def test_plantFlag_no_dupes(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     result = board.plantFlag(0,0)
     self.assertEqual(result, minesweeper.FLAG_OK)
     result = board.plantFlag(0,0)
@@ -195,7 +195,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(board.flagCount(), 1)
 
   def test_plantFlag_checkcoords(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
 
     # Can't plant flag outside of the grid
     result = board.plantFlag(0,100)
@@ -215,7 +215,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(result, minesweeper.FLAG_ILLEGAL)
 
   def test_plantFlag_multiple(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     result = board.plantFlag(0,0)
     self.assertEqual(result, minesweeper.FLAG_OK)
     result = board.plantFlag(3,2)
@@ -225,7 +225,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(board.flagCount(), 3)
 
   def test_removeFlag(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     result = board.plantFlag(0,0)
     self.assertEqual(board.flagCount(), 1)
     self.assertEqual(result, minesweeper.FLAG_OK)
@@ -234,13 +234,13 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(result, minesweeper.FLAG_OK)
 
   def test_removeFlag_empty(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     result = board.removeFlag(0,0)
     self.assertEqual(board.flagCount(), 0)
     self.assertEqual(result, minesweeper.FLAG_NONE)
 
   def test_removeFlag_twice(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     result = board.plantFlag(0,0)
     self.assertEqual(board.flagCount(), 1)
     self.assertEqual(result, minesweeper.FLAG_OK)
@@ -252,7 +252,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(result, minesweeper.FLAG_NONE)
     
   def test_puzzleSolved_too_few(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     result = board.solved()
     self.assertEqual(result, minesweeper.NOT_ENOUGH_FLAGS)
     result = board.plantFlag(0,0)
@@ -262,7 +262,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(result, minesweeper.NOT_ENOUGH_FLAGS)
     
   def test_puzzleSolved_too_many(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     board.clear()
     board.board[11] = True
     result = board.plantFlag(0,0)
@@ -272,7 +272,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(result, minesweeper.TOO_MANY_FLAGS)
     
   def test_puzzleSolved_wrong(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     board.clear()
     board.board[11] = True
     board.plantFlag(0,2)
@@ -280,7 +280,7 @@ class TestMinesweeper(unittest.TestCase):
     self.assertEqual(result, minesweeper.WRONG)
     
   def test_puzzleSolved(self):
-    board = minesweeper.minesweeper(minesweeper.EASY)
+    board = minesweeper.Minesweeper(minesweeper.EASY)
     board.clear()
     board.board[11] = True
     board.plantFlag(1,2)
