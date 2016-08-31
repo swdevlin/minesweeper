@@ -40,7 +40,7 @@ UI is done. Yay for Google fonts.
 
 I wanted to keep right click working in order to inspect the UI. To plant a flag you use ctrl + mouse click
 
-Time for the UI was 6 hours.
+Time for the UI was 8 hours.
 
 ReST API in Django don't match my mental model. node.js/Express does a great
 job of mapping code to ReST interfaces. From my limited exposure I feel like
@@ -58,7 +58,6 @@ updated to reflect that. So if you refresh the browser and enter the
 last game you played, you can resume without having blown up. I am 
 sure that's a feature. :blush: There should be a better interface for
 resuming a game. Maybe list past games, or at least show the maximum game number.
-Again, ran out of time.
 
 ## General Notes
 
