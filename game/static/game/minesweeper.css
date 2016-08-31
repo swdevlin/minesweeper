@@ -12,6 +12,11 @@ div.instructions {
   text-align: center;
 }
 
+#resume-error {
+  display: none;
+  padding: 5px;
+}
+
 #message { text-align: center}
 
 #footer-right { 

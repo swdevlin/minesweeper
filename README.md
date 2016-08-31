@@ -7,6 +7,8 @@
 * ~~web to create a new game~~
 * ~~web to toggle a grid~~
 * ~~web to submit a final board~~
+* ~~Resume game~~
+* ~~Warn if game id is not correct~~
 
 ## Diary
 
@@ -50,6 +52,9 @@ new so I decided to pass for this exercise.
 I had a problem with permissions when POSTing to a url. I used ```@csrf_exempt```
 instead of fighting with the Django permission model. Obviously, with production
 code, I would get the permission model to work.
+
+There should be a better interface for resuming a game. Maybe list past games, or at
+least show the maximum game number. Again, ran out of time.
 
 ## General Notes
 

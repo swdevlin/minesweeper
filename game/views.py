@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from django.views.decorators.csrf import csrf_exempt
 from game.models import Game
 import json
@@ -42,7 +42,7 @@ def get_game(request, game_id):
     return HttpResponse(jsonForGame(game))
   except:
     print(sys.exc_info()[0])
-    return HttpReponseBadRequest('could not retrieve game')
+    return HttpResponseNotFound('could not retrieve game')
 
 @csrf_exempt
 def create_game(request):
@@ -55,7 +55,7 @@ def create_game(request):
     elif diff == 'hard':
       game = Game.createHard()
     else:
-      return HttpReponseBadRequest('difficulty can only be easy, standard, or hard')
+      return HttpResponseBadRequest('difficulty can only be easy, standard, or hard')
     game.save()
     return HttpResponse(jsonForGame(game))
   except:
@@ -73,7 +73,7 @@ def flag_cell(request, game_id):
     return HttpResponse(json.dumps({'board': game.game.playerBoard, 'flags': game.game.flags}))
   except:
     print(sys.exc_info()[0])
-    return HttpReponseBadRequest('game id, row, or col not valid')
+    return HttpResponseBadRequest('game id, row, or col not valid')
 
 @csrf_exempt
 def unflag_cell(request, game_id):
@@ -87,6 +87,6 @@ def unflag_cell(request, game_id):
     return HttpResponse(json.dumps({'board': game.game.playerBoard, 'flags': game.game.flags}))
   except:
     print(sys.exc_info()[0])
-    return HttpReponseBadRequest('game id, row, or col not valid')
+    return HttpResponseBadRequest('game id, row, or col not valid')
 
   

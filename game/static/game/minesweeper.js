@@ -92,6 +92,12 @@ $(document).ready(function() {
   $('#resume').click(function() {
     var id = $('#game-id').val()
     $.get('/game/game/' + id, resumeGame)
+    .error(function(err) {
+      if (err.status === 404) {
+        $('#resume-error').fadeIn().fadeOut(5000)
+      } else {
+      }
+    })
   })
 })
 
