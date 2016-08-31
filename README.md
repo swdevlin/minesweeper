@@ -53,8 +53,12 @@ I had a problem with permissions when POSTing to a url. I used ```@csrf_exempt``
 instead of fighting with the Django permission model. Obviously, with production
 code, I would get the permission model to work.
 
-There should be a better interface for resuming a game. Maybe list past games, or at
-least show the maximum game number. Again, ran out of time.
+When you click on a cell with a bomb the game state on the server is not
+updated to reflect that. So if you refresh the browser and enter the 
+last game you played, you can resume without having blown up. I am 
+sure that's a feature. :blush: There should be a better interface for
+resuming a game. Maybe list past games, or at least show the maximum game number.
+Again, ran out of time.
 
 ## General Notes
 
