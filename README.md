@@ -82,4 +82,4 @@ I overloaded the save method to create JSON strings of the Minesweeper data and
 assign them to the Model fields. I could not find a way to do the reverse: trigger
 a function after an object is loaded from the database. Because of that, I added
 a fromDB method with converts the JSON fields to lists and then updates the
-Minesweeper object. Again, not elegant, but it works.
+Minesweeper object. Not elegant, but it works.
