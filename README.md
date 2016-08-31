@@ -47,6 +47,10 @@ find a reference to a Django plug-in that makes ReST APIs cleaner. But it
 seemed really tied to the ORM, and would have meant learning something else
 new so I decided to pass for this exercise.
 
+I had a problem with permissions when POSTing to a url. I used ```@csrf_exempt```
+instead of fighting with the Django permission model. Obviously, with production
+code, I would get the permission model to work.
+
 ## General Notes
 
 Python seems simple enough; library support appears to be excellent. Django was easy
