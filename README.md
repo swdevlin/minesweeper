@@ -61,6 +61,10 @@ resuming a game. Maybe list past games, or at least show the maximum game number
 
 ## General Notes
 
+I am using utf8 for the files, the flag and bomb icons are utf8 characters. If we
+need to support older browsers, then something like http://fontawesome.io/ could be
+used instead.
+
 Python seems simple enough; library support appears to be excellent. Django was easy
 enough to dive into. Apps and Projects had me scratching my head for a few minutes.
 
