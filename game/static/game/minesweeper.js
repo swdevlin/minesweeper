@@ -4,6 +4,23 @@ var ctrlIsDown = false
 var size = 22
 var elapsedTime = 0
 var timer
+var boardWidth = 0
+
+function windowResized() {
+  if (boardWidth === 0)
+    return
+  var width = $('#gameboard').width()
+  var diff = (width-boardWidth)/2
+  if (Math.abs(diff) >= 1) {
+    $('.cell').each(function(index) {
+      var cell = $(this)
+      var p = cell.position()
+      var l = p.left + diff
+      cell.css({left: l+'px'})
+    })
+    boardWidth = width
+  }
+}
 
 $(document).keydown(function(event){
   if (event.which=="17")
@@ -142,6 +159,7 @@ function renderBoard() {
     } 
     rOffset += size
   }
+  boardWidth = width
   $('#gameboard').html(grid)
   $('#footer-left').html(minesRemaining() + ' mines')
   if (hiddenCells() === game.mines) {

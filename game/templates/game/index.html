@@ -10,34 +10,38 @@
     <link href="{% static "game/minesweeper.css" %}" rel="stylesheet">
     <script src="{% static "game/minesweeper.js" %}"></script>
   </head>
-  <body>
-    <div class="container">
-      <div class="page-header text-center">
-        <h1>Minesweeper</h1>
-        <p>The classic Windows game brought back to life.</p>
-      </div>
-    </div>
-    <div id="gameboard" class="container" style="position:relative">
-      <div class="row text-center">
-        <button id="easy" class="btn btn-success btn-lg launch" type="button">Start an Easy game</button>
-        <p><em>9x9 grid, 10 mines</em></p>
-      </div>
-      <div class="row text-center">
-        <button id="standard" class="btn btn-primary btn-lg launch" type="button">Start a Standard game</button>
-        <p><em>16x16 grid, 40 mines</em></p>
-      </div>
-      <div class="row text-center">
-        <button id="hard" class="btn btn-danger btn-lg launch" type="button">Start a Hard game</button>
-        <p><em>16x30 grid, 99 mines</em></p>
-      </div>
-    </div>
-    <div id="footer" class="well container collapse">
+  <body onresize="windowResized()">
+    <div class="container-fluid">
       <div class="row">
-        <div id="footer-left" class="col-md-4"></div>
-        <div id="footer-center" class="col-md-4">
-          <div id="message" class="collapse"></div>
+        <div class="page-header text-center">
+          <h1>Minesweeper</h1>
+          <p>The classic Windows game brought back to life.</p>
         </div>
-        <div id="footer-right" class="col-md-4"></div>
+      </div>
+      <div class="row">
+        <div id="gameboard" class="col-xs-12" style="position:relative">
+          <div class="row text-center">
+            <button id="easy" class="btn btn-success btn-lg launch" type="button">Start an Easy game</button>
+            <p><em>9x9 grid, 10 mines</em></p>
+          </div>
+          <div class="row text-center">
+            <button id="standard" class="btn btn-primary btn-lg launch" type="button">Start a Standard game</button>
+            <p><em>16x16 grid, 40 mines</em></p>
+          </div>
+          <div class="row text-center">
+            <button id="hard" class="btn btn-danger btn-lg launch" type="button">Start a Hard game</button>
+            <p><em>16x30 grid, 99 mines</em></p>
+          </div>
+        </div>
+      </div>
+      <div id="footer" class="well container-fluid collapse">
+        <div class="row">
+          <div id="footer-left" class="col-xs-4"></div>
+          <div id="footer-center" class="col-xs-4">
+            <div id="message" class="collapse"></div>
+          </div>
+          <div id="footer-right" class="col-xs-4"></div>
+        </div>
       </div>
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
