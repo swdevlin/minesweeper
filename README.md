@@ -76,7 +76,7 @@ all storable objects to inherit off Model. I thought about making my Minesweeper
 inherit from Model, but I would have the same problem of lists and matrices. I did
 ponder using a string to hold the assorted boards. But turns out one can't replace
 a character in a string using [], one needs to splice and dice. I was not keen on
-that so I left the code as I work it.
+that so I left the code as I originally developed it.
 
 I overloaded the save method to create JSON strings of the Minesweeper data and
 assign them to the Model fields. I could not find a way to do the reverse: trigger
