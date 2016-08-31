@@ -33,7 +33,7 @@ def create_game(request):
       game = Game.createEasy()
     elif diff == 'standard':
       game = Game.createStandard()
-    elif diff == 'standard':
+    elif diff == 'hard':
       game = Game.createHard()
     else:
       return HttpReponseBadRequest('difficulty can only be easy, standard, or hard')
