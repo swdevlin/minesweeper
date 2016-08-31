@@ -59,7 +59,17 @@ function incrementTime() {
   $('#footer-right').html(zeros + elapsedTime)
 }
 
-function createdBoard(data) {
+function resumeGame(data) {
+  game = JSON.parse(data)
+  $('#gameboard').height(game.rows*size+size)
+  $('#footer').collapse()
+  renderBoard()
+  elapsedTime = 0
+  timer = setInterval(incrementTime, 1000)
+  $('#message').html('Game #' + game.id)
+}
+
+function createBoard(data) {
   game = JSON.parse(data)
   $('#gameboard').height(game.rows*size+size)
   $('#footer').collapse()
@@ -71,13 +81,17 @@ function createdBoard(data) {
 
 $(document).ready(function() {
   $('#easy').click(function() {
-    $.post(gamesUrl, {difficulty: 'easy'}, createdBoard)
+    $.post(gamesUrl, {difficulty: 'easy'}, createBoard)
   })
   $('#standard').click(function() {
-    $.post(gamesUrl, {difficulty: 'standard'}, createdBoard)
+    $.post(gamesUrl, {difficulty: 'standard'}, createBoard)
   })
   $('#hard').click(function() {
-    $.post(gamesUrl, {difficulty: 'hard'}, createdBoard)
+    $.post(gamesUrl, {difficulty: 'hard'}, createBoard)
+  })
+  $('#resume').click(function() {
+    var id = $('#game-id').val()
+    $.get('/game/game/' + id, resumeGame)
   })
 })
 

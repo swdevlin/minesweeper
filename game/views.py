@@ -25,6 +25,25 @@ def click_cell(request, game_id):
     print(sys.exc_info()[0])
     return HttpReponseBadRequest('game id, row, or col not valid')
 
+def jsonForGame(game):
+  return json.dumps({
+    'id': game.id,
+    'rows': game.game.rows,
+    'columns': game.game.columns,
+    'flags': game.game.flags,
+    'board': game.game.playerBoard,
+    'mines': game.game.numberOfMines()
+  })
+
+def get_game(request, game_id):
+  try:
+    game = Game.objects.get(id=int(game_id))
+    game.fromDB()
+    return HttpResponse(jsonForGame(game))
+  except:
+    print(sys.exc_info()[0])
+    return HttpReponseBadRequest('could not retrieve game')
+
 @csrf_exempt
 def create_game(request):
   try:
@@ -38,14 +57,9 @@ def create_game(request):
     else:
       return HttpReponseBadRequest('difficulty can only be easy, standard, or hard')
     game.save()
-    return HttpResponse(json.dumps({'id': game.id, 'rows': game.game.rows, 'columns': game.game.columns, 'flags': game.game.flags, 'board': game.game.playerBoard, 'mines': game.game.numberOfMines()}))
+    return HttpResponse(jsonForGame(game))
   except:
     return HttpResponse(-2)
-
-def resume_game(request, game_id):
-  template = loader.get_template('game/board.html')
-  context = {}
-  return HttpResponse(template.render(context, request))
 
 @csrf_exempt
 def flag_cell(request, game_id):
