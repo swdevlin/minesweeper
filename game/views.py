@@ -10,12 +10,7 @@ def index(request):
   template = loader.get_template('game/index.html')
   context = {}
   return HttpResponse(template.render(context, request))
- 
-def new_game(request):
-  template = loader.get_template('game/new.html')
-  context = {}
-  return HttpResponse(template.render(context, request))
-  
+   
 @csrf_exempt
 def click_cell(request, game_id):
   try:
