@@ -4,6 +4,14 @@ div.cell {
   height:22;
 }
 
+div.instructions {
+  color: #808080;
+  font-style: italic;
+  font-family: Arial, san-serif;
+  font-size: 10pt;
+  text-align: center;
+}
+
 #message { text-align: center}
 
 #footer-right { 

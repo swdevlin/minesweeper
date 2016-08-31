@@ -66,6 +66,7 @@ function createdBoard(data) {
   renderBoard()
   elapsedTime = 0
   timer = setInterval(incrementTime, 1000)
+  $('#message').html('Game #' + game.id)
 }
 
 $(document).ready(function() {
@@ -100,10 +101,11 @@ function plantFlag(row, col) {
 function clickCell(row, col) {
   $.post('/game/game/' + game.id + '/click_cell', {row: row, col: col}, function(data) {
     data = JSON.parse(data)
-    if (data.result) {
-      game.board = data.board
-      renderBoard()
-    } else {
+    game.board = data.board
+    if (!data.result)
+      game.board[row*game.columns+col] = '💣'
+    renderBoard()
+    if (!data.result) {
       var cells = findClickableCells()
       cells.off('click')
       cells.css('cursor', 'auto');
